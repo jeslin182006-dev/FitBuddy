@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}FitBuddy Dashboard{% endblock %}
+{% block content %}
+<section class="page-head"><p class="eyebrow">ADMIN / COACH VIEW</p><h1>All users & plans</h1><p>Review stored profiles and the latest original/updated plans.</p></section>
+{% if not records %}<div class="card empty">No users yet. Generate a plan first.</div>{% endif %}
+{% for item in records %}
+<article class="card user-card">
+  <div class="user-header"><div><h2>{{ item.user.username }}</h2><p>{{ item.user.user_id }} · {{ item.user.goal }} · {{ item.user.intensity }}</p></div><form method="post" action="/delete-user/{{ item.user.user_id }}" onsubmit="return confirm('Delete this user and plans?')"><button class="danger" type="submit">Delete</button></form></div>
+  <div class="profile grid five"><div><small>Age</small><strong>{{ item.user.age }}</strong></div><div><small>Weight</small><strong>{{ item.user.weight }} kg</strong></div><div><small>Goal</small><strong>{{ item.user.goal }}</strong></div><div><small>Intensity</small><strong>{{ item.user.intensity }}</strong></div><div><small>Created</small><strong>{{ item.user.created_at.strftime('%Y-%m-%d') }}</strong></div></div>
+  {% if item.plan %}<div class="admin-plans"><div><h3>Original plan</h3><pre>{{ item.plan.original_plan }}</pre></div><div><h3>Updated plan</h3>{% if item.plan.updated_plan %}<pre>{{ item.plan.updated_plan }}</pre><p class="feedback"><b>Feedback:</b> {{ item.plan.feedback }}</p>{% else %}<p>No feedback update yet.</p>{% endif %}</div></div>{% endif %}
+</article>
+{% endfor %}
+{% endblock %}

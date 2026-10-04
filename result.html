@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Your FitBuddy Plan{% endblock %}
+{% block content %}
+<section class="page-head">
+  <p class="eyebrow">PERSONALIZED PLAN</p>
+  <h1>Hey {{ username }}, here’s your plan.</h1>
+  {% if message %}<div class="alert success">{{ message }}</div>{% endif %}
+</section>
+<div class="profile grid five">
+  <div><small>User ID</small><strong>{{ user_id }}</strong></div>
+  <div><small>Age</small><strong>{{ age }}</strong></div>
+  <div><small>Weight</small><strong>{{ weight }} kg</strong></div>
+  <div><small>Goal</small><strong>{{ goal }}</strong></div>
+  <div><small>Intensity</small><strong>{{ intensity }}</strong></div>
+</div>
+<section class="result-grid">
+  <article class="card plan-card"><div class="section-title"><h2>🏋️ 7-Day Workout Plan</h2><span>Gemini</span></div><pre>{{ workout_plan }}</pre></article>
+  <aside class="card tip-card"><h2>🥗 Nutrition / Recovery Tip</h2><p>{{ nutrition_tip }}</p><a class="button secondary" href="/feedback">Update this plan</a></aside>
+</section>
+<div class="disclaimer">FitBuddy provides general wellness information. Stop exercise if you experience pain or concerning symptoms and seek appropriate professional guidance.</div>
+{% endblock %}

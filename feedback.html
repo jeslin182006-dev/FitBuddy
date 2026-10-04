@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Update Your Plan{% endblock %}
+{% block content %}
+<section class="narrow card">
+  <p class="eyebrow">AI FEEDBACK LOOP</p><h1>Refine your workout</h1>
+  <p>Enter your User ID and describe what you want changed. Examples: “more cardio”, “add more rest days”, or “make the plan lower intensity”.</p>
+  {% if error %}<div class="alert error">{{ error }}</div>{% endif %}
+  <form method="post" action="/submit-feedback">
+    <label>User ID<input name="user_id" required placeholder="e.g. FB001"></label>
+    <label>Feedback<textarea name="feedback" rows="8" required maxlength="2000" placeholder="Tell FitBuddy what you want to change..."></textarea></label>
+    <button type="submit">Regenerate Plan →</button>
+  </form>
+</section>
+{% endblock %}
